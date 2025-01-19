@@ -32,7 +32,7 @@ import keystrokesmod.client.utils.CoolDown;
 import keystrokesmod.client.utils.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class KillAura extends Module {
+public class LegitAura extends Module {
 
     private static EntityPlayer target;
     private List<EntityPlayer> pTargets;
@@ -58,8 +58,8 @@ public class KillAura extends Module {
      * @Since 10/6/2023
      * @CodeQuality GOOD.
      */
-    public KillAura() {
-        super("KillAura", ModuleCategory.combat);
+    public LegitAura() {
+        super("LegitAura", ModuleCategory.combat);
         this.registerSetting(reach = new SliderSetting("Reach", 3.3, 3, 6, 0.05));
         this.registerSetting(aps = new DoubleSliderSetting("Left CPS", 9, 13, 1, 60, 0.5));
         this.registerSetting(customRPS = new TickSetting("Custom Rotation Speed",false));
@@ -233,15 +233,15 @@ public class KillAura extends Module {
         this.pitch = pitch;
     }
     private void block() {
-        this.sendUseItem(KillAura.mc.thePlayer, KillAura.mc.theWorld, KillAura.mc.thePlayer.getCurrentEquippedItem());
-        KillAura.mc.gameSettings.keyBindUseItem.pressed = true;
-        KillAura.mc.thePlayer.sendQueue.addToSendQueue(new C08PacketPlayerBlockPlacement(new BlockPos(-1, -1, -1), 255, KillAura.mc.thePlayer.getHeldItem(), 0.0f, 0.0f, 0.0f));
+        this.sendUseItem(LegitAura.mc.thePlayer, LegitAura.mc.theWorld, LegitAura.mc.thePlayer.getCurrentEquippedItem());
+        LegitAura.mc.gameSettings.keyBindUseItem.pressed = true;
+        LegitAura.mc.thePlayer.sendQueue.addToSendQueue(new C08PacketPlayerBlockPlacement(new BlockPos(-1, -1, -1), 255, LegitAura.mc.thePlayer.getHeldItem(), 0.0f, 0.0f, 0.0f));
         this.blocking = true;
     }
 
     private void unblock() {
         if (this.blocking) {
-            KillAura.mc.gameSettings.keyBindUseItem.pressed = false;
+            LegitAura.mc.gameSettings.keyBindUseItem.pressed = false;
             mc.getNetHandler().addToSendQueue(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, EnumFacing.DOWN));
             this.blocking = false;
         }
